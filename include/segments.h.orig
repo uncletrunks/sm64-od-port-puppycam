@@ -1,7 +1,5 @@
-#ifndef _SEGMENTS_H
-#define _SEGMENTS_H
-
-#define USE_EXT_RAM
+#ifndef SEGMENTS_H
+#define SEGMENTS_H
 
 /*
  * Memory addresses for segments. Ideally, this header file would not be

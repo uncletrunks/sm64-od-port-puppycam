@@ -11,8 +11,6 @@
 
 #include "controller_api.h"
 
-s16 rightstick[2];
-
 #define DEADZONE 4960
 #ifndef TARGET_OD
 static bool init_ok;
@@ -94,22 +92,6 @@ static void controller_sdl_read(OSContPad *pad) {
         int stick_y = -lefty / 0x100;
         pad->stick_y = stick_y == 128 ? 127 : stick_y;
     }
-
-    uint32_t magnitude_sq2 = (uint32_t)(rightx * righty) + (uint32_t)(rightx * righty);
-            if (magnitude_sq2 > (uint32_t)(DEADZONE * DEADZONE)) {
-                rightstick[0] = rightx / 0x100;
-                rightstick[1] = righty / 0x100;
-            }
-            else
-            {
-                if (rightx < DEADZONE)
-                    rightstick[0] = 0;
-                if (righty < DEADZONE)
-                    rightstick[1] = 0;
-
-            }
-
-
 }
 
 #else /* TARGET_OD */
