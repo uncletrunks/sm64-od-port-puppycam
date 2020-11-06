@@ -151,14 +151,27 @@ static void controller_sdl_read(OSContPad *pad) {
         }
     }
 
+    printf("%d\n", SDL_JoystickNumAxes(sdl_joy));
     int16_t leftx = SDL_JoystickGetAxis(sdl_joy, 0);
     int16_t lefty = SDL_JoystickGetAxis(sdl_joy, 1);
+    int16_t rightx = SDL_JoystickGetAxis(sdl_joy, 2);
+    int16_t righty = SDL_JoystickGetAxis(sdl_joy, 3);
 
     uint32_t magnitude_sq = (uint32_t)(leftx * leftx) + (uint32_t)(lefty * lefty);
     if (magnitude_sq > (uint32_t)(DEADZONE * DEADZONE)) {
         pad->stick_x = leftx / 0x100;
         int stick_y = -lefty / 0x100;
         pad->stick_y = stick_y == 128 ? 127 : stick_y;
+    }
+    uint32_t magnitude_sq1 = (uint32_t)(rightx * rightx) + (uint32_t)(righty * righty);
+    if (magnitude_sq1 > (uint32_t)(DEADZONE * DEADZONE)) {
+        rightstick[0] = rightx / 0x100;
+        int stick_y = -righty / 0x100;
+        rightstick[1] = stick_y == 128 ? 127 : stick_y;
+    }
+    else {
+        rightstick[0] = 0;
+	rightstick[1] = 0;
     }
 }
 #endif
