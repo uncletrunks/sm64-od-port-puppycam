@@ -151,7 +151,6 @@ static void controller_sdl_read(OSContPad *pad) {
         }
     }
 
-    printf("%d\n", SDL_JoystickNumAxes(sdl_joy));
     int16_t leftx = SDL_JoystickGetAxis(sdl_joy, 0);
     int16_t lefty = SDL_JoystickGetAxis(sdl_joy, 1);
     int16_t rightx = SDL_JoystickGetAxis(sdl_joy, 2);
